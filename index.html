@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine's Day</title>
+ <link rel="icon" type="image/png" href="pixel-heart-isolated-pink-png.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
+<style>
+  html {
+    cursor: url('yes.png'), auto;
+  }
+  body {
+    background-image: url('bgbom.png'); 
+    background-size: cover; 
+    background-repeat: no-repeat;
+    font-family: 'Gamja Flower', cursive;
+    text-align: center;
+    margin-top: 300px;
+    font-size: 30px;
+    color: pink;
+  }
+  #no-button {
+    background-color: pink;
+    color: white;
+    border: transparent;
+    padding: 5px 20px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    font-family: 'Gamja Flower', cursive;
+    font-size: 24px;
+  }
+  #no-button:hover {
+    transform: translateX(-50%) translateY(-50%) scale(1.2);
+  }
+  #yes-button {
+    background-color:#FBB3B3;
+    color: white;
+    border: transparent;
+    padding: 5px 20px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-family: 'Gamja Flower', cursive;
+    font-size: 24px;
+  }
+  #result {
+    display: none;
+    margin-top: 300px;
+    font-family: 'Gamja Flower', cursive;
+    font-size: 43px;
+    color: pink;
+  }
+  #gift-button {
+    background-color: pink;
+    color: white;
+    border: transparent;
+    padding: 10px 30px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-family: 'Gamja Flower', cursive;
+    font-size: 24px;
+  }
+  #time-counter {
+    display: none;
+    margin-top: 50px;
+    font-family: 'Gamja Flower', cursive;
+    font-size: 100px;
+    color: pink;
+  }
+  #password-field-container {
+    display: none;
+    margin-top: 50px;
+  }
+  #password-field {
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 8px;
+    border: 2px solid pink;
+    font-family: 'Gamja Flower', cursive;
+    color: pink;
+  }
+  #password-error {
+    color: red;
+    font-family: 'Gamja Flower', cursive;
+    font-size: 20px;
+    margin-top: 20px;
+  }
+ #wait_msg {
+    display: none;
+    margin-top: 10px;
+    font-family: 'Gamja Flower', cursive;
+    font-size: 30px;
+    color: pink;
+  }
+ #image-left {
+    position: absolute;
+    bottom: 10px;
+    left: 1px;
+    width: 250px;
+transform: scaleX(-1);
+  }
+  #image-right {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 250px;
+  }
+ #image-centre {
+position: absolute;
+    display: none;
+    width: 400px;
+ top: 210px;
+    right: 500px;
+  }
+ #image-top {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 250px;
+  }
+ #image-b {
+position: absolute;
+    top: 140px;
+    right: 670px;
+    
+    width: 100px;
+  }
+
+</style>
+</head>
+<body>
+<audio autoplay loop>
+    <source src="bg.mp3" type="audio/mpeg"> 
+  </audio>
+ <img src="d9a1yo4-cab2e641-2ddf-437d-a9ef-c05f58b9062d.gif" alt="mid" id="image-b">
+ <img src="3232601.gif" alt="Right top" id="image-top">
+<img src="ddkgl5m-f64ff880-5ca7-4741-8674-733de7649117.gif" alt="Left Image" id="image-left">
+  <img src="sanrio-hello-kitty-sanrio-character.gif" alt="Right Image" id="image-right">
+  <h1 id="valentine-msg">Will you be my Valentine?</h1>
+  <button id="no-button">No</button>
+  <button id="yes-button">Yes</button>
+  <div id="result">
+    <p id="love-message">◦•●❤♡I love you babe♡❤●•◦</p>
+    <button id="gift-button">Your gift is here</button>
+  </div>
+
+  <div id="password-field-container">
+    <input type="password" id="password-field" placeholder="Enter a sweet word ❤🌸">
+    <div id="password-error"></div>
+  </div>
+  <div id="time-counter"></div>
+<p id="wait_msg">babe, wait til the valentine day come</p>
+<img src="letter.png" alt="center" id="image-centre">
+
+
+<script>
+  const resultDiv = document.getElementById('result');
+  const yesButton = document.getElementById('yes-button');
+  const noButton = document.getElementById('no-button');
+  const valentineMsg = document.getElementById('valentine-msg');
+  const giftButton = document.getElementById('gift-button');
+  const timeCounter = document.getElementById('time-counter');
+  const passwordFieldContainer = document.getElementById('password-field-container');
+  const passwordField = document.getElementById('password-field');
+  const passwordError = document.getElementById('password-error');
+const waitmsg = document.getElementById('wait_msg');
+const imagecentre = document.getElementById('image-centre');
+
+  noButton.addEventListener('click', () => {
+    const randomX = Math.floor(Math.random() * (window.innerWidth - 100));
+    const randomY = Math.floor(Math.random() * (window.innerHeight - 100));
+    noButton.style.position = 'absolute';
+    noButton.style.left = randomX + 'px';
+    noButton.style.top = randomY + 'px';
+  });
+
+  noButton.addEventListener('mouseover', () => {
+    const randomX = Math.floor(Math.random() * (window.innerWidth - 100));
+    const randomY = Math.floor(Math.random() * (window.innerHeight - 100));
+    noButton.style.position = 'absolute';
+    noButton.style.left = randomX + 'px';
+    noButton.style.top = randomY + 'px';
+  });
+
+  yesButton.addEventListener('click', () => {
+    resultDiv.style.display = 'block';
+    yesButton.style.display = 'none';
+waitmsg.style.display = 'none';
+    noButton.style.display = 'none';
+    valentineMsg.style.display = 'none';
+imagecentre.style.display = 'none';
+  });
+
+  giftButton.addEventListener('click', () => {
+    giftButton.style.display = 'none';
+waitmsg.style.display = 'none';
+imagecentre.style.display = 'none';
+    passwordFieldContainer.style.display = 'block';
+  });
+
+  passwordField.addEventListener('keyup', (e) => {
+    if (e.key === 'Enter') {
+      const password = passwordField.value.trim().toLowerCase();
+      const validPasswords = ['nhbek', 'nhbk', 'nhebek', 'zahra', 'zahrty', 'himo', 'hilmi', 'hbibi', 'hboub'];
+
+      if (validPasswords.includes(password)) {
+        passwordFieldContainer.style.display = 'none';
+
+        passwordError.textContent = '';
+        timeCounter.style.display = 'block';
+        let countDownDate = new Date('February 14, 2024').getTime();
+
+        let x = setInterval(function() {
+          let now = new Date().getTime();
+          let distance = countDownDate - now;
+
+          let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          timeCounter.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+resultDiv.style.display = 'none';
+waitmsg.style.display = 'none';
+imagecentre.style.display = 'inline-block';
+
+          if (distance < 0) {
+            clearInterval(x);
+            timeCounter.innerHTML = "";
+          }
+        }, 1000);
+      } else {
+        passwordError.textContent = 'Password incorrect Zahra, try again!';
+      }
+    }
+  });
+</script>
+</body>
+</html>
